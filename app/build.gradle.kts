@@ -1,20 +1,27 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-kapt")
 }
 
 android {
     namespace = "com.example.guessit"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.guessit"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
     }
 
     buildTypes {
@@ -44,6 +51,8 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+
 
     // KTX
     implementation ("androidx.core:core-ktx:1.12.0")

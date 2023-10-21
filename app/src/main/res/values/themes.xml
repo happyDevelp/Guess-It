@@ -1,9 +1,25 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.GuessIt" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.GuessIt" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="Theme.GuessIt" parent="Base.Theme.GuessIt" />
+
+    <style name="GoButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/ok_green_color</item>
+        <item name="colorControlHighlight">@color/selected_green_color</item>
+        <item name="android:textColor">@color/white_text_color</item>
+        <item name="colorAccent">@color/selected_green_color</item>
+    </style>
+
+    <style name="SkipButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Borderless.Colored</item>
+        <item name="android:textColor">@color/grey_button_color</item>
+        <item name="colorControlHighlight">@color/skip_red_color</item>
+    </style>
+
 </resources>
+
