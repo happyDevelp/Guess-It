@@ -8,10 +8,16 @@ import androidx.lifecycle.ViewModel
 class GameViewModel : ViewModel() {
 
     // The current word
-    val word = MutableLiveData<String>()
+    private val _word = MutableLiveData<String>()
+    val word: LiveData<String>
+        get() = _word
 
-    // The current score
-    val score = MutableLiveData<Int>()
+    // The current score, can use just inside of this class
+    private val _score = MutableLiveData<Int>()
+    // This variable has override getter and setter so that I can just receive value and can`t to change
+    val score: LiveData<Int>
+        get() = _score
+
 
     // The list of words - the front of the list is the next word to guess
     private lateinit var wordList: MutableList<String>
@@ -20,7 +26,7 @@ class GameViewModel : ViewModel() {
         Log.i("GameViewModel", "GameViewModel created!")
         resetList()
         nextWord()
-        score.value = 0
+        _score.value = 0
     }
 
 
@@ -55,18 +61,18 @@ class GameViewModel : ViewModel() {
         if (wordList.isEmpty()) {
             /*gameFinished()*/
         } else {
-            word.value = wordList.removeAt(0)
+            _word.value = wordList.removeAt(0)
         }
     }
 
     fun onSkip() {
         if (score.value!! > 0) //fix !!
-            score.value = score.value?.minus(1) //try to use another way.  UPD: tried, not worked, so should use just like here
+            _score.value = score.value?.minus(1) //try to use another way.  UPD: tried, not worked, so should use just like here
         nextWord()
     }
 
     fun onCorrect() {
-        score.value = score.value?.plus(1)
+        _score.value = score.value?.plus(1)
         nextWord()
     }
 
