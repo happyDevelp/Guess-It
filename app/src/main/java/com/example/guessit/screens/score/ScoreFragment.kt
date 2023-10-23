@@ -1,6 +1,7 @@
 package com.example.guessit.screens.score
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.guessit.R
 import com.example.guessit.databinding.ScoreFragmentBinding
+import com.example.guessit.screens.game.SCORE
 
 
 class ScoreFragment : Fragment() {
@@ -32,4 +34,6 @@ class ScoreFragment : Fragment() {
     private fun onPlayAgain() {
         findNavController().navigate(ScoreFragmentDirections.actionRestart())
     }
+
+
 }

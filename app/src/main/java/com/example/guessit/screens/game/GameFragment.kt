@@ -1,43 +1,29 @@
 package com.example.guessit.screens.game
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.example.guessit.R
 import com.example.guessit.databinding.GameFragmentBinding
+import androidx.lifecycle.ViewModelProvider
 
-class GameFragment : Fragment() {
+const val SCORE = "score"
+
+class GameFragment : Fragment(){
+
+    private lateinit var viewModel: GameViewModel
+
     private lateinit var binding: GameFragmentBinding
     var score: Int = 0
     var word: String = ""
-    private var wordList = mutableListOf<String>(
-        "queen",
-        "hospital",
-        "basketball",
-        "cat",
-        "change",
-        "snail",
-        "soup",
-        "calendar",
-        "sad",
-        "desk",
-        "guitar",
-        "home",
-        "railway",
-        "zebra",
-        "jelly",
-        "car",
-        "crow",
-        "trade",
-        "bag",
-        "roll",
-        "bubble"
-    )
-
+    private var wordList = mutableListOf<String>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,6 +35,14 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (savedInstanceState != null) {
+            score = savedInstanceState.getInt(SCORE)
+        }
+
+        Log.i("GameFragment", "Called ViewModelProvider")
+        viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+
         resetList()
         nextWord()
 
@@ -90,16 +84,15 @@ class GameFragment : Fragment() {
         wordList.shuffle()
     }
 
-    private fun gameFinished(){
-        val action =GameFragmentDirections.actionGameToScore(score)
+    private fun gameFinished() {
+        val action = GameFragmentDirections.actionGameToScore(score)
         findNavController().navigate(action)
     }
 
-    private fun nextWord(){
-        if(wordList.isEmpty()){
+    private fun nextWord() {
+        if (wordList.isEmpty()) {
             gameFinished()
-        }
-        else{
+        } else {
             wordList.removeAt(0)
         }
         updateWordText()
@@ -114,14 +107,20 @@ class GameFragment : Fragment() {
         binding.scoreText.text = score.toString()
     }
 
-    fun onSkip(){
-        if(score > 0)
+    fun onSkip() {
+        if (score > 0)
             score--
         nextWord()
     }
 
-    private fun onCorrect(){
+    private fun onCorrect() {
         score++
         nextWord()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+       /* Log.i("GameFragment", "OnSaveInstance is called")*/
+        outState.putInt(SCORE, score)
     }
 }
