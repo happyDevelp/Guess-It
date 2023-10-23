@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.guessit.R
 import com.example.guessit.databinding.ScoreFragmentBinding
-import com.example.guessit.screens.game.SCORE
+
 
 
 class ScoreFragment : Fragment() {
