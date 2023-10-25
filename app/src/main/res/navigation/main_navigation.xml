@@ -12,7 +12,8 @@
         tools:layout="@layout/title_fragment">
         <action
             android:id="@+id/action_title_to_game"
-            app:destination="@id/game_destination" />
+            app:destination="@id/game_destination"
+             />
     </fragment>
     <fragment
         android:id="@+id/game_destination"
@@ -21,7 +22,9 @@
         tools:layout="@layout/game_fragment">
         <action
             android:id="@+id/action_game_to_score"
-            app:destination="@id/score_destination" />
+            app:destination="@id/score_destination"
+            app:popUpTo="@id/title_destination"
+             />
     </fragment>
     <fragment
         android:id="@+id/score_destination"
@@ -30,7 +33,8 @@
         tools:layout="@layout/score_fragment">
         <action
             android:id="@+id/action_restart"
-            app:destination="@id/game_destination" />
+            app:destination="@id/game_destination"
+            app:popUpTo="@id/title_destination" />
         <argument
             android:name="score"
             app:argType="integer" />
